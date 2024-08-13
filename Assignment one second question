@@ -1,0 +1,16 @@
+import java.util.Scanner;
+public class PrintNumbersWithSkip {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the lower bound (M): ");
+        int m = scanner.nextInt();
+        System.out.println("Enter the upper bound (N): ");
+        int n = scanner.nextInt();
+        System.out.println("Enter the skip value (K): ");
+        int k = scanner.nextInt();
+        System.out.print("Numbers from " + m + " to " + n + " with a skip of " + k + ": ");
+        for (int i = m; i <= n; i += k + 1) {
+            System.out.print(i + ", ");
+        }
+    }
+}
