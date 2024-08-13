@@ -1,0 +1,78 @@
+import java.util.Scanner;
+class BankAccount {
+    private String depositorName;
+    private int accountNumber;
+    private String accountType;
+    private double balance;
+    public BankAccount(String depositorName, int accountNumber, String accountType, double balance) {
+        this.depositorName = depositorName;
+        this.accountNumber = accountNumber;
+        this.accountType = accountType;
+        this.balance = balance;
+    }
+    public void readAccountDetails() {
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Depositor Name: " + depositorName);
+        System.out.println("Account Type: " + accountType);
+        System.out.println("Balance: Rs." + balance);
+    }
+    public void depositAmount(double amount) {
+        balance += amount;
+        System.out.println("Rs." + amount + " deposited successfully. New balance: Rs." + balance);
+    }
+    public void withdrawAmount(double amount) {
+        if (balance - amount >= 500) {
+            balance -= amount;
+            System.out.println("Rs." + amount + " withdrawn successfully. New balance: Rs." + balance);
+        } else {
+            System.out.println("Insufficient balance. Minimum balance must be Rs.500.00");
+        }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter depositor name: ");
+        String depositorName = scanner.nextLine();
+        System.out.print("Enter account number: ");
+        int accountNumber = scanner.nextInt();
+        System.out.print("Enter account type (Savings/Current): ");
+        String accountType = scanner.next();
+        System.out.print("Enter initial balance (Minimum Rs.500.00): ");
+        double balance = scanner.nextDouble();
+        if (balance < 500) {
+            System.out.println("Minimum balance must be Rs.500.00");
+            return;
+        }
+        BankAccount account = new BankAccount(depositorName, accountNumber, accountType, balance);
+        while (true) {
+            System.out.println("\n1. Display account details");
+            System.out.println("2. Deposit amount");
+            System.out.println("3. Withdraw amount");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    account.readAccountDetails();
+                    break;
+                case 2:
+                    System.out.print("Enter amount to deposit: ");
+                    double depositAmount = scanner.nextDouble();
+                    account.depositAmount(depositAmount);
+                    break;
+                case 3:
+                    System.out.print("Enter amount to withdraw: ");
+                    double withdrawAmount = scanner.nextDouble();
+                    account.withdrawAmount(withdrawAmount);
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+}
